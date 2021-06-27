@@ -1,0 +1,19 @@
+﻿@model InkomstUitgaveDetailViewModel
+<a class="btn btn-warning" asp-controller="InkomstUitgave" asp-action="Index">Terug naar overzicht</a>
+
+<div id="detail" class="card">
+    <div class="card-body">
+        <h5 class="card-title"><strong>@Model.Date</strong></h5>
+        <p class="card-text">@Model.Beschrijving</p>
+        @if (Model.Inkomst)
+        {
+            <p class="card-text" style="color:green">Inkomst: @Model.Bedrag $</p>
+
+        }
+        else
+        {
+            <p class="card-text" style="color:red">Uitgave: @Model.Bedrag $</p>
+        }
+    </div>
+
+</div>

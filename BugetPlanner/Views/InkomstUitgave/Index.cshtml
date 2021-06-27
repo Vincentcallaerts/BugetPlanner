@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<InkomstUitgaveListViewModel>
+
+<h1>Inkomsten/Uitgave</h1>
+
+@if (Model == null || Model.Count() == 0)
+{
+    <p>Er zijn geen Uitgave Of inkomste beschikbaar</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Bedrag</th>
+                <th scope="col">Date</th>
+                <th scope="col">Opties</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.GroupBy(x => x.Inkomst))
+            {
+                @foreach (var inkomst in item.OrderBy(x => x.Date))
+                {
+                    if (inkomst.Inkomst)
+                    {
+                        <tr style="background-color:green">
+                            <td>@inkomst.Bedrag</td>
+                            <td>@inkomst.Date</td>
+                            <td>
+                                <a asp-controller="InkomstUitgave" asp-action="detail" asp-route-id="@inkomst.Id">
+                                    <input type="button" class="btn btn-primary" value="Detail" />
+                                </a>
+                                <a asp-controller="InkomstUitgave" asp-action="edit" asp-route-id="@inkomst.Id">
+                                    <input type="button" class="btn btn-warning" value="Edit" />
+                                </a>
+                                <form asp-controller="InkomstUitgave" asp-action="ComfirmDelete" asp-route-id="@inkomst.Id" method="post">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="background-color:red">
+                            <td>@inkomst.Bedrag</td>
+                            <td>@inkomst.Date</td>
+                            <td>
+                                <a asp-controller="InkomstUitgave" asp-action="detail" asp-route-id="@inkomst.Id">
+                                    <input type="button" class="btn btn-primary" value="Detail" />
+                                </a>
+                                <a asp-controller="InkomstUitgave" asp-action="edit" asp-route-id="@inkomst.Id">
+                                    <input type="button" class="btn btn-warning" value="Edit" />
+                                </a>
+                                <form asp-controller="InkomstUitgave" asp-action="ComfirmDelete" asp-route-id="@inkomst.Id" method="post">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+        </table>
+}

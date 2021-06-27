@@ -1,0 +1,31 @@
+﻿@model InkomstUitgaveCreateViewModel
+
+
+<form asp-controller="InkomstUitgave" asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label asp-for="Beschrijving"></label>
+        <select class=" form-control" asp-items="@Model.InkomstUitgaveBeschrijving" asp-for="Beschrijving"></select>
+        <span class="text-danger" asp-validation-for="Beschrijving"></span>
+    </div>
+
+    <div>
+        <label asp-for="Bedrag"></label>
+        <input class=" form-control" asp-for="Bedrag">
+        <span class="text-danger" asp-validation-for="Bedrag"></span>
+    </div>
+
+    <div>
+        <label asp-for="Date"></label>
+        <input class=" form-control" asp-for="Date" />
+        <span class="text-danger" asp-validation-for="Date"></span>
+    </div>
+    <div>
+        <label asp-for="Inkomst"></label>
+        <input asp-for="Inkomst" />
+        <span class="text-danger" asp-validation-for="Inkomst"></span>
+    </div>
+    <br />
+    <button class="btn btn-success" type="submit">Create</button>
+    <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Terug naar overzicht</a>
+</form>
